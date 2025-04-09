@@ -1,0 +1,27 @@
+{
+  "name": "todomvc.demo.playwright",
+  "version": "1.0.0",
+  "description": "Playwright test project that test simple TodoMVC application.",
+  "main": "index.js",
+  "scripts": {
+    "test": "npx playwright test",
+    "headed": "npx playwright test --headed",
+    "debug": "playwright test --debug",
+    "report": "npx playwright show-report"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ivanovakatya/TodoMVC.Demo.Playwright.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ivanovakatya/TodoMVC.Demo.Playwright/issues"
+  },
+  "homepage": "https://github.com/ivanovakatya/TodoMVC.Demo.Playwright#readme",
+  "devDependencies": {
+    "@playwright/test": "^1.51.1",
+    "@types/node": "^22.14.0"
+  }
+}
