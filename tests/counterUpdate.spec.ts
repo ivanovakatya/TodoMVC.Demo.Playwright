@@ -1,4 +1,4 @@
-import { test, expect } from "./headerText";
+import { test, expect } from "./baseUrlHeaderFixture";
 import { TodosPO } from "../page-objects/Todos";
 
 const itemOne = "Test 1";
@@ -8,14 +8,11 @@ const itemFour = "Test 4";
 
 let todos: TodosPO;
 test.describe("Counter updates correctly", () => {
-  test.beforeEach(async ({ page }) => {
+  test.beforeEach(async ({ page, baseUrlHeading }) => {
     todos = new TodosPO(page);
+    await baseUrlHeading();
   });
-  test("Verify that the counter updates correctly after adding and deleting todo items.", async ({
-    verifyTodosHeading,
-  }) => {
-    await verifyTodosHeading();
-
+  test("Verify that the counter updates correctly after adding and deleting multiple todo items.", async ({}) => {
     await todos.addNewTodoItem(itemOne);
     await expect(todos.todoCount).toHaveText("1");
     await todos.addNewTodoItem(itemTwo);
@@ -34,20 +31,19 @@ test.describe("Counter updates correctly", () => {
     await expect(todos.todoCount).toBeHidden();
   });
 
-  test("Mark a todo item as completed and and verify count update correctly", async ({
-    verifyTodosHeading,
-  }) => {
-    await verifyTodosHeading();
-
+  test("Verify that the counter updates correctly after marking todo item as completed and verify count update correctly", async ({}) => {
+    await todos.addNewTodoItem(itemOne);
+    await todos.addNewTodoItem(itemTwo);
+    await expect(todos.todoCount).toHaveText("2");
+    await todos.markAsDoneFirstTodos.first().check();
+    await expect(todos.todoCount).toHaveText("1");
+  });
+  test("Verify that the counter updates correctly after marking single todo item as completed", async ({}) => {
     await todos.addNewTodoItem(itemOne);
     await todos.markAsDoneFirstTodos.check();
     await expect(todos.todoCount).toHaveText("0");
   });
-  test("Mark todo items as completed and verify count update correctly", async ({
-    verifyTodosHeading,
-  }) => {
-    await verifyTodosHeading();
-
+  test("Verify that the counter updates correctly after marking multiples todo items as completed and verify count update correctly", async ({}) => {
     await todos.addNewTodoItem(itemOne);
     await todos.addNewTodoItem(itemTwo);
     await todos.markAllAsDone.click();
