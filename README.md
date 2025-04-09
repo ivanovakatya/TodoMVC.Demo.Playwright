@@ -49,3 +49,8 @@ npm run report
 ## 🏃‍♀️ Run project via Github Actions
 
 [In the Github respository --> Actions](https://github.com/ivanovakatya/TodoMVC.Demo.Playwright/actions/workflows/playwright.yml)
+
+- Click on `Run workflow`
+- Click on the button `Run workflow again`
+  <br />
+  After the workflow is completed, Report is uploaded to it. This can be downloaded and viewed (index.html)
