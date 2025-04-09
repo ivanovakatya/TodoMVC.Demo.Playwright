@@ -17,25 +17,26 @@ test.describe("Filtering functionality", () => {
     await todos.addNewTodoItem(itemOne);
     await todos.addNewTodoItem(itemTwo);
     await todos.allLink.click();
-    await expect(todos.getTodoItemByText(itemOne)).toBeVisible();
-    await expect(todos.getTodoItemByText(itemTwo)).toBeVisible();
+
+    await todos.verifyTodoVisibility(itemOne, true);
+    await todos.verifyTodoVisibility(itemTwo, true);
 
     await todos.markAsDoneFirstTodos.first().check();
     await todos.verifyTodoItemClass(itemOne, "completed");
-    await expect(todos.getTodoItemByText(itemTwo)).toBeVisible();
+    await todos.verifyTodoVisibility(itemTwo, true);
 
     await todos.activeLink.click();
-    await expect(todos.getTodoItemByText(itemOne)).toBeHidden();
-    await expect(todos.getTodoItemByText(itemTwo)).toBeVisible();
+    await todos.verifyTodoVisibility(itemOne, false);
+    await todos.verifyTodoVisibility(itemTwo, true);
 
     await todos.completedLink.click();
-    await expect(todos.getTodoItemByText(itemOne)).toBeVisible();
-    await expect(todos.getTodoItemByText(itemTwo)).toBeHidden();
+    await todos.verifyTodoVisibility(itemOne, true);
+    await todos.verifyTodoVisibility(itemTwo, false);
 
     await todos.clearCompletedLink.click();
     await expect(todos.clearCompletedLink).toBeHidden();
 
     await todos.activeLink.click();
-    await expect(todos.getTodoItemByText(itemTwo)).toBeVisible();
+    await todos.verifyTodoVisibility(itemTwo, true);
   });
 });

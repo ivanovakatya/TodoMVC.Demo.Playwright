@@ -66,4 +66,13 @@ export class TodosPO {
     const todoItem = this.todoItem.filter({ hasText: itemText });
     await expect(todoItem).toHaveClass(new RegExp(expectedClass));
   }
+
+  async verifyTodoVisibility(itemText: string, shouldBeVisible: boolean) {
+    const todoItem = this.getTodoItemByText(itemText);
+    if (shouldBeVisible) {
+      await expect(todoItem).toBeVisible();
+    } else {
+      await expect(todoItem).toBeHidden();
+    }
+  }
 }
